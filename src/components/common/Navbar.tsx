@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { Button } from "../ui/button";
-import { ModeToggle } from "../theme_component/mode-toggle";
+
+import { ModeToggle } from "@/components/theme_component/mode-toggle";
+import { Button } from "@/components/ui/button";
 
 
 const buttonClasses = "text-md font-bold py-5"
 
-export default function Navbar() {
+export default async function Navbar() {
   return (
     <nav className="flex flex-row items-center justify-between border-b-2 py-9 px-16">
       <Link href={`/`}>
@@ -21,7 +22,7 @@ export default function Navbar() {
           <Button className={buttonClasses}>Access Note</Button>
         </Link>
 
-        <Link href={`/sign-in`}>
+        <Link href={`/api/auth/signin`}>
           <Button className={buttonClasses}>Sign In</Button>
         </Link>
       </div>

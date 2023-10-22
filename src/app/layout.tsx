@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
-import { ReactNode } from 'react'
 import { Baloo_Bhai_2 as BalooBhai } from "next/font/google"
+import { ReactNode } from 'react'
+import { ClerkProvider } from '@clerk/nextjs'
 
 import { ThemeProvider } from '@/components/theme_component/theme-provider'
 import Navbar from '@/components/common/Navbar'
@@ -28,16 +29,18 @@ export default function RootLayout({ children }: TRootLayout) {
   return (
     <html lang="en">
       <body className={devanagari.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-        </ThemeProvider>
+        <ClerkProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Navbar />
+            <main>{children}</main>
+            <Footer />
+          </ThemeProvider>
+        </ClerkProvider>
       </body>
     </html>
   )
