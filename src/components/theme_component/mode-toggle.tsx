@@ -13,6 +13,7 @@ export function ModeToggle() {
     <Button
       variant={"default"}
       size={"icon"}
+      className="transition-all duration-300 hover:rotate-90 hover:scale-110"
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}
     >
       {theme === "light" ? (

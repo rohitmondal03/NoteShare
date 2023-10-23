@@ -4,7 +4,7 @@ import { ModeToggle } from "@/components/theme_component/mode-toggle";
 import { Button } from "@/components/ui/button";
 
 
-const buttonClasses = "text-md font-bold py-5"
+const buttonClasses = "text-md font-bold py-5 transition-all duration-300 hover:scale-110"
 
 export default async function Navbar() {
   return (

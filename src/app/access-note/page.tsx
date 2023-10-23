@@ -16,7 +16,7 @@ export default function AccessNotePage() {
     <section className="py-16 space-y-16">
       <div className="space-y-3">
         <h1 className="font-bold text-5xl text-center">Access Note</h1>
-        <p className="text-center text-xl">Access any note you require, by asking the Unique ID and password of that note by the owner.</p>
+        <p className="text-center text-xl text-zinc-700 dark:text-zinc-400">Access any note you require, by asking the Unique ID and password of that note by the owner.</p>
       </div>
 
       <Card className="w-[30vw] mx-auto border-2 border-zinc-700 dark:border-zinc-400">
