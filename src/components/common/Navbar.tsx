@@ -8,7 +8,7 @@ const buttonClasses = "text-md font-bold py-5"
 
 export default async function Navbar() {
   return (
-    <nav className="flex flex-row items-center justify-between border-b-2 py-9 px-16">
+    <nav className="flex flex-row items-center justify-between border-b-2 border-zinc-600 dark:border-zinc-400 py-9 px-16">
       <Link href={`/`}>
         <h1 className="text-5xl font-bold">Logo</h1>
       </Link>
