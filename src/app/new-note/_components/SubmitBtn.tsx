@@ -10,7 +10,11 @@ export default function NewNoteSubmitBtn() {
   const { pending } = useFormStatus();
 
   return (
-    <Button type="submit" variant={pending ? "destructive" : "default"}>
+    <Button
+      type="submit"
+      variant={pending ? "destructive" : "default"}
+      className="hover:scale-105 transition-all duration-200 ease-out"
+    >
       {pending ?
         <>Adding...</> :
         <>Submit</>

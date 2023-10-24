@@ -4,6 +4,5 @@ type TnewNote = {
   title: string;
   note: string;
   password: string;
-  confirmPassword: string;
   userId: string
 }

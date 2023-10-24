@@ -12,7 +12,7 @@ import "./styles/globals.css"
 
 const devanagari = BalooBhai({
   subsets: ["latin"],
-  weight: ["400", '500', '600', '700', '800']
+  weight: ['800']
 })
 
 type TRootLayout = {
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: TRootLayout) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={devanagari.className}>
         <ThemeProvider
           attribute="class"

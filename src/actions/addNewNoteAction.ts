@@ -1,14 +1,17 @@
 "use server"
 
-import { prisma } from "@/lib/prisma"
+import { redirect } from "next/navigation"
+import { revalidatePath } from "next/cache";
+
 import { TnewNote } from "../../types";
+import { prisma } from "@/lib/prisma";
+
 
 export async function addNewNote(formData: TnewNote) {
-  const { password, title, confirmPassword, userId, note } = formData;
+  await prisma.note.create({
+    data: {...formData}
+  })
 
-  // await prisma.note.create({
-  //   data: {...formData}
-  // })
-
-  console.log(password, title, confirmPassword, userId, note)
+  revalidatePath("/profile")
+  redirect("/access-note")
 }
