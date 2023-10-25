@@ -1,3 +1,6 @@
+import { redirect } from "next/navigation"
+
+import { getAuthSession } from "@/lib/nextauth"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {
@@ -11,7 +14,14 @@ import {
 import { Button } from "@/components/ui/button"
 
 
-export default function AccessNotePage() {
+export default async function AccessNotePage() {
+  const session = await getAuthSession();
+
+  if (!session) {
+    redirect("/api/auth/signin")
+  }
+
+
   return (
     <section className="py-16 space-y-16">
       <div className="space-y-3">
@@ -23,7 +33,7 @@ export default function AccessNotePage() {
         <CardHeader>
           <CardTitle className="text-2xl">Get Note</CardTitle>
           <CardDescription>
-            Ask for a unique id and password to access your notes.
+            Ask for a unique id of the required note.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-2">
@@ -35,15 +45,6 @@ export default function AccessNotePage() {
               placeholder="Enter Unique ID...."
               className="outline"
               autoComplete="off"
-            />
-          </div>
-          <div className="space-y-1">
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              placeholder="Enter Password...."
-              className="outline"
             />
           </div>
         </CardContent>

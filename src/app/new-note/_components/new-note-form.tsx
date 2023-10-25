@@ -2,7 +2,6 @@
 
 import { useSession } from "next-auth/react"
 import { ChangeEvent, useState } from "react"
-import { ArrowRightIcon } from "@radix-ui/react-icons"
 
 import { TnewNote } from "../../../../types"
 import NewNoteSubmitBtn from "./SubmitBtn"
@@ -10,7 +9,6 @@ import { addNewNote } from "@/actions/addNewNoteAction"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import {
   Card,
   CardContent,
@@ -19,35 +17,26 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
 
 
 export default function NewNoteForm() {
   const { data: session } = useSession();
 
-  const [password, setPassword] = useState<string>();
-  const [title, setTitle] = useState<string>();
-  const [note, setNote] = useState<string>();
-
   // user details
-  const userDetails = session?.user;
+  const userDetails= session?.user;
 
-  const params: TnewNote = {
-    title: title as string,
-    note: note as string,
-    password: password as string,
-    userId: userDetails?.id as string,
-  }
+  const [noteDetails, setNoteDetails] = useState<TnewNote>({
+    title: "",
+    note: "",
+    userId: userDetails?.id as string
+  });
+  console.log(noteDetails);
+
 
   return (
     <form
       action={async () => {
-        await addNewNote(params);
+        await addNewNote(noteDetails);
       }}
     >
       <Card className="mx-auto w-[30vw] outline-double">
@@ -57,16 +46,16 @@ export default function NewNoteForm() {
             Add a new note for yourself and share it with others in secured way.
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-2">
+        <CardContent className="space-y-6">
           <div className="space-y-1">
             <Label htmlFor="title">Title</Label>
             <Input
               id="title"
               type="text"
               placeholder="Give a unique title..."
-              value={title}
+              value={noteDetails.title}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setTitle(e.target.value)
+                setNoteDetails((prev) => ({ ...prev, title: e.target.value }))
               }
               className="outline"
               autoComplete="off"
@@ -74,29 +63,15 @@ export default function NewNoteForm() {
             />
           </div>
           <div className="space-y-1">
-            <Label htmlFor="note">Title</Label>
+            <Label htmlFor="note">Note</Label>
             <Textarea
               id="note"
-              placeholder="Write note here..."
+              placeholder="Write your note here..."
               rows={7}
-              value={title}
-              onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
-                setNote(e.target.value)
-              }
-              className="outline"
-              required
-            />
-          </div>
-          <div className="space-y-1">
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              placeholder="Enter password..."
-              value={password}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setPassword(e.target.value)
-              }
+              value={noteDetails.note}
+              onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
+                setNoteDetails(prev => ({ ...prev, note: e.target.value }))
+              }}
               className="outline"
               required
             />

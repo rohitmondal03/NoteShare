@@ -1,14 +1,10 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-datasource db {
-  provider          = "postgresql"
-  url               = env("DATABASE_URL")
-  // shadowDatabaseUrl = env("SHADOW_DATABASE_URL") // Only needed when using a cloud provider that doesn't support the creation of new databases, like Heroku. Learn more: https://pris.ly/d/migrate-shadow
-}
-
 generator client {
   provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Account {
@@ -17,15 +13,14 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text()
-  access_token      String? @db.Text()
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text()
+  id_token          String?
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -45,8 +40,8 @@ model User {
   emailVerified DateTime?
   image         String?
   accounts      Account[]
-  sessions      Session[]
   notes         Note[]
+  sessions      Session[]
 }
 
 model VerificationToken {
@@ -58,12 +53,10 @@ model VerificationToken {
 }
 
 model Note {
-  id       String @id @default(cuid())
-  title    String
-  note     String
-  password String
-  userId   String
-  User     User   @relation(fields: [userId], references: [id])
+  id     String @id @default(cuid())
+  title  String
+  note   String
+  userId String
 
-  @@unique([id])
+  User User @relation(fields: [userId], references: [id])
 }

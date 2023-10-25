@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Session } from "next-auth";
 
 import { getAuthSession } from "@/lib/nextauth"
@@ -10,10 +11,8 @@ export default async function ProfilePage() {
   const userDetails = session?.user;
 
   return (
-    <section>
-      Name: {userDetails?.name}
-      <img src={userDetails?.image as string} />
-      Email: {userDetails?.email}
+    <section className="py-16">
+      
     </section>
   )
 }

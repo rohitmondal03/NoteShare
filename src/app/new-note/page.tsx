@@ -1,7 +1,19 @@
+import { redirect } from "next/navigation";
+
+import { getAuthSession } from "@/lib/nextauth";
 import NewNoteForm from "./_components/new-note-form";
 
 
-export default function NewNotePage() {
+export default async function NewNotePage() {
+  const session = await getAuthSession();
+
+  // session 
+  const userDetails = session?.user;
+
+  if(!userDetails) {
+    redirect("/api/auth/signin")
+  }
+
   return (
     <section className="py-16 space-y-16">
       <div className="space-y-3">
