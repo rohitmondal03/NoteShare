@@ -1,17 +1,19 @@
 "use server"
 
-import { redirect } from "next/navigation"
-import { revalidatePath } from "next/cache";
-
+import { redirect } from "next/navigation";
 import { TnewNote } from "../../types";
 import { prisma } from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
 
 
 export async function addNewNote(formData: TnewNote) {
-  await prisma.note.create({
-    data: {...formData}
+  const data = await prisma.note.create({
+    data: formData
   })
 
   revalidatePath("/profile")
-  redirect("/access-note")
+
+  if(data) {
+    redirect("/profile")
+  }
 }

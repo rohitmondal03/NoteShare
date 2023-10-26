@@ -1,7 +1,7 @@
 "use client"
 
-import { useSession } from "next-auth/react"
-import { ChangeEvent, useState } from "react"
+import { Session } from "next-auth"
+import { ChangeEvent, useEffect, useState } from "react"
 
 import { TnewNote } from "../../../../types"
 import NewNoteSubmitBtn from "./SubmitBtn"
@@ -20,17 +20,30 @@ import {
 
 
 export default function NewNoteForm() {
-  const { data: session } = useSession();
+  const [user, setUser] = useState<Session["user"]>();
 
-  // user details
-  const userDetails= session?.user;
+
+  useEffect(() => {
+    async function getUser() {
+      await fetch("/api/getUser")
+        .then((data) => data.json())
+        .then((data) => { setUser(data) })
+        .catch((error) => console.error("Error getting user", error))
+    }
+    getUser();
+  }, [])
 
   const [noteDetails, setNoteDetails] = useState<TnewNote>({
     title: "",
     note: "",
-    userId: userDetails?.id as string
+    userId: ""
   });
-  console.log(noteDetails);
+
+  useEffect(() => {
+    setNoteDetails(prev => ({ ...prev, userId: user?.id as string }))
+  }, [user])
+
+  // console.log(noteDetails)
 
 
   return (
