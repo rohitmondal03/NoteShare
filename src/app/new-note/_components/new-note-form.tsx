@@ -5,7 +5,7 @@ import { ChangeEvent, useEffect, useState } from "react"
 
 import { TnewNote } from "../../../../types"
 import NewNoteSubmitBtn from "./SubmitBtn"
-import { addNewNote } from "@/actions/addNewNoteAction"
+import { addNewNote } from "@/actions/addNewNote"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
@@ -42,8 +42,6 @@ export default function NewNoteForm() {
   useEffect(() => {
     setNoteDetails(prev => ({ ...prev, userId: user?.id as string }))
   }, [user])
-
-  // console.log(noteDetails)
 
 
   return (

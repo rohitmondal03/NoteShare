@@ -13,7 +13,7 @@ export default function NewNoteSubmitBtn() {
     <Button
       type="submit"
       variant={pending ? "destructive" : "default"}
-      className="hover:scale-105 transition-all duration-200 ease-out"
+      className="font-bold hover:scale-105 transition-all duration-200 ease-out"
     >
       {pending ?
         <>Adding...</> :

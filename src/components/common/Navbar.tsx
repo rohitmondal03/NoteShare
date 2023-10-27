@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { ModeToggle } from "@/components/theme_component/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 
 const buttonClasses = "text-md font-bold py-5 transition-all duration-300 hover:scale-110"
@@ -25,19 +26,26 @@ export default function Navbar() {
 
 
   return (
-    <nav className="flex flex-row items-center justify-between border-b-2 border-zinc-400 dark:border-zinc-500 py-8 px-16">
+    <nav className="flex flex-row items-center justify-between border-b-2 border-zinc-400 dark:border-zinc-500 py-8 px-12">
       <Link href={`/`}>
-        <h1 className="text-5xl font-bold">Logo</h1>
+        <h1 className="text-3xl text-center font-bold bg-black text-white dark:bg-white dark:text-black px-3 py-2 rounded-lg">NoteShare</h1>
       </Link>
 
       <div className="flex flex-row items-center justify-between gap-x-10">
         {session ? (
-          <Link href={`/profile`}>
-            <Avatar>
-              <AvatarImage src={profileImg as string} alt="profile pic" />
-              <AvatarFallback>{fname}</AvatarFallback>
-            </Avatar>
-          </Link>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link href={`/your-notes`}>
+                <Avatar className="hover:scale-105 hover:rotate-[360deg] transition duration-300">
+                  <AvatarImage src={profileImg as string} alt="profile pic" />
+                  <AvatarFallback>{fname}</AvatarFallback>
+                </Avatar>
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent className="bg-black text-white dark:bg-white dark:text-black">
+              <p>Your Notes</p>
+            </TooltipContent>
+          </Tooltip>
         ) : (
           null
         )}

@@ -5,6 +5,7 @@ import { ReactNode } from 'react'
 import AuthProvider from '@/components/common/AuthProvider'
 import { ThemeProvider } from '@/components/theme_component/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
+import { TooltipProvider } from '@/components/ui/tooltip'
 import Navbar from '@/components/common/Navbar'
 import Footer from '@/components/common/Footer'
 import "./styles/globals.css"
@@ -12,7 +13,7 @@ import "./styles/globals.css"
 
 const devanagari = BalooBhai({
   subsets: ["latin"],
-  weight: ['800']
+  weight: ["400", "600", "700", '800']
 })
 
 type TRootLayout = {
@@ -36,10 +37,12 @@ export default function RootLayout({ children }: TRootLayout) {
           disableTransitionOnChange
         >
           <AuthProvider>
-            <Navbar />
-            <main>{children}</main>
-            <Footer />
-            <Toaster />
+            <TooltipProvider>
+              <Navbar />
+              <main>{children}</main>
+              <Footer />
+              <Toaster />
+            </TooltipProvider>
           </AuthProvider>
         </ThemeProvider>
       </body>

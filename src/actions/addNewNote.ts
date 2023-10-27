@@ -7,13 +7,19 @@ import { revalidatePath } from "next/cache";
 
 
 export async function addNewNote(formData: TnewNote) {
+  const { note, title, userId } = formData
+
   const data = await prisma.note.create({
-    data: formData
+    data: {
+      userId: userId,
+      title: title.trim(),
+      note: note.trim(),
+    }
   })
 
   revalidatePath("/profile")
 
-  if(data) {
-    redirect("/profile")
+  if (data) {
+    redirect("/your-notes")
   }
 }
