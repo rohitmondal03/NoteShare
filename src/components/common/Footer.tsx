@@ -40,7 +40,7 @@ export default function Footer() {
         <h1 className="text-2xl font-bold">Developed by</h1>
         <Link
           href={`https://portfolio-ten-virid-46.vercel.app/`}
-          className={`${roboto.className} text-3xl text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-amber-600 font-bold`}
+          className={`${roboto.className} text-3xl text-pink-600 dark:text-pink-500 underline`}
         >
           @rohit_mondal
         </Link>

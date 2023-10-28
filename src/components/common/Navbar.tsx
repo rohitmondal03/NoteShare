@@ -36,7 +36,7 @@ export default function Navbar() {
           <Tooltip>
             <TooltipTrigger asChild>
               <Link href={`/your-notes`}>
-                <Avatar className="hover:scale-105 hover:rotate-[360deg] transition duration-300">
+                <Avatar className="hover:scale-110 hover:rotate-[15deg] transition duration-300">
                   <AvatarImage src={profileImg as string} alt="profile pic" />
                   <AvatarFallback>{fname}</AvatarFallback>
                 </Avatar>

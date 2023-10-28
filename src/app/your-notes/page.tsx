@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/card";
 
 
+export const dynamic = "auto"
 export const revalidate = "true";
 
 
@@ -58,13 +59,15 @@ export default async function ProfilePage() {
           ))}
         </div>
       ) : (
-        <div className="h-[50vh] flex items-center justify-center ">
-          <h1 className="text-center text-3xl font-bold w-full text-zinc-500">
+        <div className="h-[50vh] flex flex-col items-center justify-center gap-y-8">
+          <h1 className="text-center text-4xl font-bold w-full text-zinc-500">
             You don&apos;t have any notes...!!
           </h1>
 
           <Link href={`/new-note`}>
-            <Button>Make first note</Button>
+            <Button className="font-bold">
+              Make first note
+            </Button>
           </Link>
         </div>
       )}
