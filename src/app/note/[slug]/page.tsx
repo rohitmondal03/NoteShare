@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { Session } from "next-auth";
 
+import { DeleteButton } from "./_components/DeleteBtn";
 import { getAuthSession } from "@/lib/nextauth";
 import { prisma } from "@/lib/prisma";
-import { DeleteButton } from "./_components/DeleteBtn";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -19,6 +19,7 @@ export default async function EachNotePage(
 ) {
   const { slug } = params;
 
+  // redirect if session is not there...
   const session: Session | null = await getAuthSession();
 
   // get user details

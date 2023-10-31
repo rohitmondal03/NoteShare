@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
 
   const { id } = body;
 
-  const resp= await prisma.note.delete({
+  await prisma.note.delete({
     where: {
       id: id
     }

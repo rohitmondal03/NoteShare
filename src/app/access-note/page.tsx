@@ -3,6 +3,7 @@ import { redirect } from "next/navigation"
 import { getAuthSession } from "@/lib/nextauth"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -11,12 +12,12 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 
 
 export default async function AccessNotePage() {
   const session = await getAuthSession();
 
+  // if session not present, redirect...
   if (!session) {
     redirect("/api/auth/signin")
   }
@@ -42,8 +43,8 @@ export default async function AccessNotePage() {
             <Input
               id="uid"
               type="text"
-              placeholder="Enter Unique ID...."
-              className="outline"
+              placeholder="Enter Note ID...."
+              className="outline focus:outline-amber-400"
               autoComplete="off"
             />
           </div>

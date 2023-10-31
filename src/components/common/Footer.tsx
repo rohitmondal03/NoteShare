@@ -1,11 +1,6 @@
 import Link from "next/link";
-import { Montserrat } from "next/font/google";
 
-
-const roboto = Montserrat({
-  subsets: ["latin"],
-  weight: ["400", "700", "800", "900"]
-})
+import { monsterratFont } from "@/components/fonts/font";
 
 
 // Credit links
@@ -40,7 +35,7 @@ export default function Footer() {
         <h1 className="text-2xl font-bold">Developed by</h1>
         <Link
           href={`https://portfolio-ten-virid-46.vercel.app/`}
-          className={`${roboto.className} text-3xl text-pink-600 dark:text-pink-500 underline`}
+          className={`${monsterratFont.className} text-3xl text-pink-600 underline transition ease-out hover:text-orange-500 `}
         >
           @rohit_mondal
         </Link>
